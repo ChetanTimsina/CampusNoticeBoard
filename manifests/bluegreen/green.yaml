@@ -22,7 +22,7 @@ spec:
         slot: green                  # Services select on this label
         version: "1.1.0"
       annotations:
-        cte412/flags-revision: "1"   # bump to roll Pods so they re-read the ConfigMap
+        cte412/flags-revision: "2"   # bump to roll Pods so they re-read the ConfigMap
     spec:
       containers:
         - name: app
@@ -31,10 +31,10 @@ spec:
           ports:
             - {name: http, containerPort: 8080}
           securityContext: {runAsNonRoot: true, allowPrivilegeEscalation: false}
-          #FLAG#env:
-          #FLAG#  - name: FEATURE_PINNED
-          #FLAG#    valueFrom:
-          #FLAG#      configMapKeyRef: {name: notice-board-flags, key: FEATURE_PINNED}  # read flag from ConfigMap
+          env:
+            - name: FEATURE_PINNED
+              valueFrom:
+                configMapKeyRef: {name: notice-board-flags, key: FEATURE_PINNED}  # read flag from ConfigMap
           resources:
             requests: {cpu: 100m, memory: 64Mi}   # same as Task 3
             limits:   {cpu: 200m, memory: 128Mi}

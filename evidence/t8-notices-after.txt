@@ -1,0 +1,1 @@
+{"notices":[{"id":3,"title":"Hostel fee deadline","category":"finance","pinned":true},{"id":1,"title":"Exam timetable published","category":"academic","pinned":false},{"id":2,"title":"Library closed Friday","category":"facilities","pinned":false},{"id":4,"title":"Sports day registration","category":"events","pinned":false}],"pinnedFirst":true}
