@@ -4,3 +4,12 @@ t3-initial T1=2026-10-19T14:42:13Z
 t3-initial T0=2026-10-19T14:49:06Z strategy=RollingUpdate version=1.0.0
 t3-initial APPLY=2026-10-19T14:49:16Z
 t3-initial T1=2026-10-19T14:49:40Z
+t5-recreate T0=2026-10-19T15:05:29Z strategy=Recreate version=1.1.0
+t5-recreate APPLY=2026-10-19T15:05:39Z
+t5-recreate T1=2026-10-19T15:06:29Z
+t5-back T0=2026-10-19T15:07:20Z strategy=Recreate version=1.0.0
+t5-back APPLY=2026-10-19T15:07:30Z
+t5-back T1=2026-10-19T15:08:20Z
+t5-rolling T0=2026-10-19T15:08:25Z strategy=RollingUpdate version=1.1.0
+t5-rolling APPLY=2026-10-19T15:08:35Z
+t5-rolling T1=2026-10-19T15:09:28Z

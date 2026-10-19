@@ -1,0 +1,11 @@
+t3-initial T0=2026-10-19T14:41:52Z strategy=RollingUpdate version=1.0.0
+t3-initial APPLY=2026-10-19T14:42:02Z
+t3-initial T1=2026-10-19T14:42:13Z
+t3-initial T0=2026-10-19T14:49:06Z strategy=RollingUpdate version=1.0.0
+t3-initial APPLY=2026-10-19T14:49:16Z
+t3-initial T1=2026-10-19T14:49:40Z
+t5-recreate T0=2026-10-19T15:00:00Z strategy=Recreate version=1.1.0
+t5-recreate APPLY=2026-10-19T15:00:10Z
+t5-recreate T1=2026-10-19T15:00:21Z
+t5-recreate T0=2026-10-19T15:02:52Z strategy=Recreate version=1.1.0
+t5-recreate APPLY=2026-10-19T15:03:02Z

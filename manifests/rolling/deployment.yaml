@@ -7,7 +7,7 @@ metadata:
   namespace: nb-02230120
   labels: {app: notice-board}
   annotations:
-    kubernetes.io/change-cause: "Initial release of 1.0.0"   # recorded in rollout history
+    kubernetes.io/change-cause: "RollingUpdate release of 1.1.0"   # recorded in rollout history
 spec:
   replicas: 3                     # lab-mandated
   progressDeadlineSeconds: 600    # rollout with no progress for this long is marked failed
@@ -23,11 +23,11 @@ spec:
     metadata:
       labels:
         app: notice-board
-        version: "1.0.0"           # label = image version
+        version: "1.1.0"           # label = image version
     spec:
       containers:
         - name: app
-          image: notice-board:02230120-1.0.0
+          image: notice-board:02230120-1.1.0
           imagePullPolicy: Never   # kubelet can never attempt a registry pull
           ports:
             - {name: http, containerPort: 8080}   # named port used by Services
