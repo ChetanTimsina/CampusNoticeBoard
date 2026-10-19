@@ -1,0 +1,4 @@
+NAME                   TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)        AGE
+notice-board           ClusterIP   10.96.82.213    <none>        80/TCP         50m
+notice-board-ext       NodePort    10.96.153.141   <none>        80:30090/TCP   50m
+notice-board-preview   ClusterIP   10.96.251.210   <none>        80/TCP         38s

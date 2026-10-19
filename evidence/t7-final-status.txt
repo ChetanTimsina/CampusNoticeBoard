@@ -1,0 +1,17 @@
+NAME                                 READY   UP-TO-DATE   AVAILABLE   AGE   CONTAINERS   IMAGES                        SELECTOR
+deployment.apps/notice-board-blue    3/3     3            3           13m   app          notice-board:02230120-1.0.0   app=notice-board,slot=blue
+deployment.apps/notice-board-green   3/3     3            3           13m   app          notice-board:02230120-1.1.0   app=notice-board,slot=green
+
+NAME                           TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)        AGE   SELECTOR
+service/notice-board           ClusterIP   10.96.82.213    <none>        80/TCP         63m   app=notice-board,slot=green
+service/notice-board-ext       NodePort    10.96.153.141   <none>        80:30090/TCP   63m   app=notice-board,slot=green
+service/notice-board-preview   ClusterIP   10.96.251.210   <none>        80/TCP         13m   app=notice-board,slot=green
+
+NAME                                      READY   STATUS    RESTARTS   AGE   IP            NODE                      NOMINATED NODE   READINESS GATES
+pod/monitor                               1/1     Running   0          34m   10.244.2.5    cte412-02230120-worker2   <none>           <none>
+pod/notice-board-blue-767dc7d8bf-2wnqq    1/1     Running   0          13m   10.244.2.10   cte412-02230120-worker2   <none>           <none>
+pod/notice-board-blue-767dc7d8bf-6gjvv    1/1     Running   0          13m   10.244.1.10   cte412-02230120-worker    <none>           <none>
+pod/notice-board-blue-767dc7d8bf-sqjhz    1/1     Running   0          13m   10.244.1.11   cte412-02230120-worker    <none>           <none>
+pod/notice-board-green-58f74d58bc-czxwv   1/1     Running   0          13m   10.244.1.13   cte412-02230120-worker    <none>           <none>
+pod/notice-board-green-58f74d58bc-zcf8n   1/1     Running   0          13m   10.244.1.12   cte412-02230120-worker    <none>           <none>
+pod/notice-board-green-58f74d58bc-zptr4   1/1     Running   0          13m   10.244.2.11   cte412-02230120-worker2   <none>           <none>

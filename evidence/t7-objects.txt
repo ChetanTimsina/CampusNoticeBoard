@@ -1,0 +1,11 @@
+NAME                                 READY   UP-TO-DATE   AVAILABLE   AGE   SLOT    VERSION
+deployment.apps/notice-board-blue    3/3     3            3           39s   blue    
+deployment.apps/notice-board-green   3/3     3            3           38s   green   
+
+NAME                                      READY   STATUS    RESTARTS   AGE   SLOT    VERSION
+pod/notice-board-blue-767dc7d8bf-2wnqq    1/1     Running   0          38s   blue    1.0.0
+pod/notice-board-blue-767dc7d8bf-6gjvv    1/1     Running   0          39s   blue    1.0.0
+pod/notice-board-blue-767dc7d8bf-sqjhz    1/1     Running   0          38s   blue    1.0.0
+pod/notice-board-green-58f74d58bc-czxwv   1/1     Running   0          38s   green   1.1.0
+pod/notice-board-green-58f74d58bc-zcf8n   1/1     Running   0          38s   green   1.1.0
+pod/notice-board-green-58f74d58bc-zptr4   1/1     Running   0          38s   green   1.1.0

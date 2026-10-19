@@ -1,0 +1,4 @@
+NAME                         ADDRESSTYPE   PORTS   ENDPOINTS                             AGE
+notice-board-7hhl8           IPv4          8080    10.244.1.10,10.244.2.10,10.244.1.11   50m
+notice-board-ext-2fmwd       IPv4          8080    10.244.1.10,10.244.2.10,10.244.1.11   50m
+notice-board-preview-7xxlb   IPv4          8080    10.244.1.12,10.244.2.11,10.244.1.13   38s
