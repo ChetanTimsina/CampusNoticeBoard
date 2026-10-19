@@ -1,0 +1,6 @@
+# Purpose: feature-flag ConfigMap read by the green Deployment. Apply: kubectl apply -f manifests/bluegreen/flags.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata: {name: notice-board-flags, namespace: nb-02230120}
+data:
+  FEATURE_PINNED: "false"   # starts false; changed to "true" in Task 8

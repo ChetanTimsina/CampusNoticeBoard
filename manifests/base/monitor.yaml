@@ -1,0 +1,32 @@
+# Purpose: availability monitor, one request per 0.5 s to http://notice-board/version, never restarted.
+# Apply: kubectl apply -f manifests/base/monitor.yaml
+# Output line: <ISO-8601 UTC timestamp> <OK|FAIL> <body or error>
+apiVersion: v1
+kind: Pod
+metadata:
+  name: monitor
+  namespace: nb-02230120
+  labels:
+    app: monitor
+    app.kubernetes.io/part-of: campus-noticeboard
+spec:
+  restartPolicy: Always            # keep measuring even if the shell dies
+  containers:
+    - name: monitor
+      image: busybox:1.36          # busybox is allowed by the Alpine-only rule; has wget
+      imagePullPolicy: Never       # image is loaded into kind nodes, never pulled
+      command: ["/bin/sh", "-c"]
+      args:
+        - |
+          while true; do
+            ts=$(date -u +%Y-%m-%dT%H:%M:%SZ)
+            if out=$(wget -q -T 1 -O - http://notice-board/version 2>&1); then
+              echo "$ts OK $(echo "$out" | tr -d '\n')"
+            else
+              echo "$ts FAIL $(echo "$out" | tr -d '\n' | cut -c1-80)wget-error"
+            fi
+            sleep 0.5
+          done
+      resources:
+        requests: {cpu: 10m, memory: 16Mi}   # tiny: leaves quota room for 7 app Pods in Tasks 7-8
+        limits:   {cpu: 20m, memory: 32Mi}   # limits >= requests

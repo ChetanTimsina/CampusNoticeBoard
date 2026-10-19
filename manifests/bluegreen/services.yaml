@@ -1,0 +1,34 @@
+# Purpose: production + preview Services for blue/green. scripts/switch.sh edits the ACTIVE-SLOT lines and re-applies.
+# Apply: kubectl apply -f manifests/bluegreen/services.yaml
+apiVersion: v1
+kind: Service
+metadata: {name: notice-board, namespace: nb-02230120, labels: {app: notice-board}}
+spec:
+  type: ClusterIP
+  selector:
+    app: notice-board
+    slot: blue  # ACTIVE-SLOT production colour
+  ports:
+    - {name: http, port: 80, targetPort: http}
+---
+apiVersion: v1
+kind: Service
+metadata: {name: notice-board-ext, namespace: nb-02230120, labels: {app: notice-board}}
+spec:
+  type: NodePort
+  selector:
+    app: notice-board
+    slot: blue  # ACTIVE-SLOT production colour
+  ports:
+    - {name: http, port: 80, targetPort: http, nodePort: 30090}
+---
+apiVersion: v1
+kind: Service
+metadata: {name: notice-board-preview, namespace: nb-02230120, labels: {app: notice-board}}
+spec:
+  type: ClusterIP
+  selector:
+    app: notice-board
+    slot: green    # preview ALWAYS points at green (never edited)
+  ports:
+    - {name: http, port: 80, targetPort: http}

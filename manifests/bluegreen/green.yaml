@@ -1,0 +1,47 @@
+# Purpose: notice-board-green Deployment (1.1.0), 3 replicas. Apply: kubectl apply -f manifests/bluegreen/green.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: notice-board-green
+  namespace: nb-02230120
+  labels: {app: notice-board, slot: green}
+  annotations:
+    kubernetes.io/change-cause: "green Deployment running 1.1.0"   # recorded in history
+spec:
+  replicas: 3                       # lab-mandated
+  minReadySeconds: 5                # same as Task 3 release settings
+  strategy:
+    type: RollingUpdate
+    rollingUpdate: {maxUnavailable: 0, maxSurge: 1}   # in-place changes (flag restart) lose no requests
+  selector:
+    matchLabels: {app: notice-board, slot: green}     # slot keeps the two colours' Pods apart
+  template:
+    metadata:
+      labels:
+        app: notice-board
+        slot: green                  # Services select on this label
+        version: "1.1.0"
+      annotations:
+        cte412/flags-revision: "1"   # bump to roll Pods so they re-read the ConfigMap
+    spec:
+      containers:
+        - name: app
+          image: notice-board:02230120-1.1.0
+          imagePullPolicy: Never     # never pull from a registry
+          ports:
+            - {name: http, containerPort: 8080}
+          securityContext: {runAsNonRoot: true, allowPrivilegeEscalation: false}
+          #FLAG#env:
+          #FLAG#  - name: FEATURE_PINNED
+          #FLAG#    valueFrom:
+          #FLAG#      configMapKeyRef: {name: notice-board-flags, key: FEATURE_PINNED}  # read flag from ConfigMap
+          resources:
+            requests: {cpu: 100m, memory: 64Mi}   # same as Task 3
+            limits:   {cpu: 200m, memory: 128Mi}
+          readinessProbe:
+            httpGet: {path: /healthz, port: http}
+            periodSeconds: 2
+          livenessProbe:
+            httpGet: {path: /version, port: http}  # not /healthz: avoids restart loops tied to health
+            initialDelaySeconds: 10
+            periodSeconds: 10

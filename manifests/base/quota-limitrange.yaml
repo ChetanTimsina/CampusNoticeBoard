@@ -1,0 +1,29 @@
+# Purpose: ResourceQuota + LimitRange for nb-02230120. Apply: kubectl apply -f manifests/base/quota-limitrange.yaml
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: nb-quota
+  namespace: nb-02230120
+spec:
+  hard:
+    requests.cpu: "1"        # lab-mandated
+    requests.memory: 1Gi     # lab-mandated
+    limits.cpu: "2"          # lab-mandated
+    limits.memory: 2Gi       # lab-mandated
+    pods: "15"               # lab-mandated
+    count/services: "4"      # lab-mandated (we use 3: notice-board, -ext, -preview)
+---
+apiVersion: v1
+kind: LimitRange
+metadata:
+  name: nb-limits
+  namespace: nb-02230120
+spec:
+  limits:
+    - type: Container
+      defaultRequest:
+        cpu: 50m        # 15 pods x 50m = 750m <= quota requests.cpu 1 (defaults alone can never exhaust it)
+        memory: 64Mi    # 15 x 64Mi = 960Mi <= quota requests.memory 1Gi
+      default:
+        cpu: 100m       # 15 x 100m = 1.5 CPU <= quota limits.cpu 2
+        memory: 128Mi   # 15 x 128Mi = 1920Mi <= quota limits.memory 2Gi
