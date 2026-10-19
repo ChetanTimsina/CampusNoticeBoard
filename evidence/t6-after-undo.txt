@@ -1,0 +1,12 @@
+NAME                           READY   UP-TO-DATE   AVAILABLE   AGE   VERSION
+deployment.apps/notice-board   3/3     3            3           26m   
+
+NAME                                      DESIRED   CURRENT   READY   AGE     VERSION
+replicaset.apps/notice-board-56f947947    3         3         3       9m11s   1.1.0
+replicaset.apps/notice-board-5b8dd9cdc9   0         0         0       26m     1.0.0
+replicaset.apps/notice-board-7c9b969579   0         0         0       3m34s   1.2.0-broken
+
+NAME                               READY   STATUS    RESTARTS   AGE     VERSION
+pod/notice-board-56f947947-2c8gw   1/1     Running   0          6m45s   1.1.0
+pod/notice-board-56f947947-86579   1/1     Running   0          6m15s   1.1.0
+pod/notice-board-56f947947-jbhbh   1/1     Running   0          6m30s   1.1.0

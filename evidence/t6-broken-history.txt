@@ -1,0 +1,6 @@
+deployment.apps/notice-board 
+REVISION  CHANGE-CAUSE
+3         Return to 1.0.0 (Recreate)
+4         RollingUpdate release of 1.1.0
+5         Release 1.2.0-broken (expected to fail)
+

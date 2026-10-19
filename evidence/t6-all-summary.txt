@@ -1,0 +1,7 @@
+Total requests:  338
+Failed requests: 0
+First timestamp: 2026-10-19T15:11:35Z
+Last timestamp:  2026-10-19T15:15:31Z
+Responses per version:
+  1.1.0: 338
+Mixed-version window (s): 0  (meaningful for ONE old->new transition)

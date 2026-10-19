@@ -1,0 +1,2 @@
+Available	True	MinimumReplicasAvailable	Deployment has minimum availability.
+Progressing	False	ProgressDeadlineExceeded	ReplicaSet "notice-board-7c9b969579" has timed out progressing.
