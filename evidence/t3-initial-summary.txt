@@ -1,0 +1,6 @@
+Total requests:  0
+Failed requests: 0
+First timestamp: 
+Last timestamp:  
+Responses per version:
+Mixed-version window (s): 0  (meaningful for ONE old->new transition)

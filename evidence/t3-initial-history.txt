@@ -1,0 +1,4 @@
+deployment.apps/notice-board 
+REVISION  CHANGE-CAUSE
+1         Initial release of 1.0.0
+

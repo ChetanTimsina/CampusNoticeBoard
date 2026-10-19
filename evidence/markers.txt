@@ -1,0 +1,6 @@
+t3-initial T0=2026-10-19T14:41:52Z strategy=RollingUpdate version=1.0.0
+t3-initial APPLY=2026-10-19T14:42:02Z
+t3-initial T1=2026-10-19T14:42:13Z
+t3-initial T0=2026-10-19T14:49:06Z strategy=RollingUpdate version=1.0.0
+t3-initial APPLY=2026-10-19T14:49:16Z
+t3-initial T1=2026-10-19T14:49:40Z

@@ -1,0 +1,44 @@
+# Purpose: notice-board Deployment (single-Deployment releases, Tasks 3,5,6). Rendered by scripts/release.sh.
+# Apply: kubectl apply -f manifests/rolling/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: notice-board
+  namespace: nb-02230120
+  labels: {app: notice-board}
+  annotations:
+    kubernetes.io/change-cause: "Initial release of 1.0.0"   # recorded in rollout history
+spec:
+  replicas: 3                     # lab-mandated
+  progressDeadlineSeconds: 600    # rollout with no progress for this long is marked failed
+  minReadySeconds: 5  # new Pod must stay Ready 5 s before it counts as available
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 0   # never remove a Ready Pod before a replacement is Ready
+      maxSurge: 1         # at most one extra Pod during the rollout (quota-friendly)
+  selector:
+    matchLabels: {app: notice-board}   # selector is immutable, so it does not contain version
+  template:
+    metadata:
+      labels:
+        app: notice-board
+        version: "1.0.0"           # label = image version
+    spec:
+      containers:
+        - name: app
+          image: notice-board:02230120-1.0.0
+          imagePullPolicy: Never   # kubelet can never attempt a registry pull
+          ports:
+            - {name: http, containerPort: 8080}   # named port used by Services
+          securityContext: {runAsNonRoot: true, allowPrivilegeEscalation: false}  # image runs as uid 10001
+          resources:
+            requests: {cpu: 100m, memory: 64Mi}   # 7 app Pods x 100m = 0.7 CPU fits quota 1 with monitor
+            limits:   {cpu: 200m, memory: 128Mi}  # 7 x 200m = 1.4 CPU < quota 2
+          readinessProbe:
+            httpGet: {path: /healthz, port: http}
+            periodSeconds: 2           # fast detection of readiness
+          livenessProbe:
+            httpGet: {path: /version, port: http}  # NOT /healthz: the broken image fails /healthz forever; using it would crash-loop Pods instead of testing the rollout
+            initialDelaySeconds: 10
+            periodSeconds: 10
