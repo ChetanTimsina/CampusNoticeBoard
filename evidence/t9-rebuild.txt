@@ -1,0 +1,6 @@
+configmap/notice-board-flags created
+deployment.apps/notice-board-blue created
+deployment.apps/notice-board-green created
+service/notice-board created
+service/notice-board-ext created
+service/notice-board-preview created
